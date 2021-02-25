@@ -78,12 +78,18 @@ function Update-Plugin {
     }
 }
 
+if(Test-Path "${env:ProgramFiles(x86)}\KeePass Password Safe 2") {
+    $folder = "${env:ProgramFiles(x86)}\KeePass Password Safe 2"
+} elseif(Test-Path "${env:ProgramFiles}\KeePass Password Safe 2") {
+    $folder = "${env:ProgramFiles}\KeePass Password Safe 2"
+}
 
 $parameters = @{
     update_uri  = 'https://raw.githubusercontent.com/rookiestyle/keepassotp/master/version.info'
     plugin_name = 'KeePassOTP'
     author      = 'Rookiestyle'
     repo        = 'KeePassOTP'
+    keepass_folder = $folder
 }
 
 Update-Plugin @parameters
